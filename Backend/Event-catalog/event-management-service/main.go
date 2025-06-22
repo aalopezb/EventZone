@@ -13,14 +13,16 @@ func main() {
 
 	r := gin.Default()
 
-	// Middleware para habilitar CORS desde el frontend en localhost:3021
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3021"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type"},
-		AllowCredentials: true,
-		MaxAge:           12 * time.Hour,
-	}))
+	AllowOrigins: []string{
+		"http://localhost:3021", // frontend propio
+		"http://localhost:3027", // frontend del microservicio de horarios
+	},
+	AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+	AllowHeaders:     []string{"Origin", "Content-Type"},
+	AllowCredentials: true,
+	MaxAge:           12 * time.Hour,
+}))
 
 	r.GET("/events", server.GetEvents)
 	r.POST("/events", server.CreateEvent)
