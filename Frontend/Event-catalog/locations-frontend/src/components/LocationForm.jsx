@@ -35,7 +35,6 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
     e.preventDefault();
     setError(null);
 
-    // Validación simple
     if (!formData.name || !formData.latitude || !formData.longitude) {
       setError('Nombre, latitud y longitud son obligatorios');
       return;
@@ -49,7 +48,8 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
       }
       onSuccess();
     } catch (err) {
-      setError('Error guardando ubicación');
+      const backendMessage = err.response?.data?.message || err.message || 'Error guardando ubicación';
+      setError(backendMessage);
     }
   };
 
