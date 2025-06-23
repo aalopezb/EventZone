@@ -26,7 +26,7 @@ jobs:
     - name: Deploy to EC2 via SSH
       run: |
         ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd ~/services/auth-service
+          cd ~/services/auth-service/EventZone
 
           docker stop auth-backend || true
           docker rm auth-backend || true
