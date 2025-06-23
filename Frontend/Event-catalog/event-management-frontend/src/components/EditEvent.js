@@ -13,7 +13,7 @@ function EditEvent({ event, onCancel, onSave }) {
         location,
         date,
       });
-      onSave();  // Avisar al padre que se guardó bien
+      onSave();  
     } catch (err) {
       alert("Error al guardar cambios");
       console.error(err);
@@ -22,12 +22,12 @@ function EditEvent({ event, onCancel, onSave }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Título" required />
-      <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descripción" />
-      <input value={location} onChange={e => setLocation(e.target.value)} placeholder="Ubicación" />
+      <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" required />
+      <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" />
+      <input value={location} onChange={e => setLocation(e.target.value)} placeholder="location" />
       <input type="date" value={date.slice(0,10)} onChange={e => setDate(e.target.value)} required />
-      <button type="submit">Guardar</button>
-      <button type="button" onClick={onCancel}>Cancelar</button>
+      <button type="submit">Save</button>
+      <button type="button" onClick={onCancel}>Cancel</button>
     </form>
   );
 }

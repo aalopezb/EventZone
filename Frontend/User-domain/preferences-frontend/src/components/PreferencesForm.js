@@ -14,7 +14,7 @@ function PreferencesForm({ userId }) {
     if (userId) {
       getPreferences(userId)
         .then((data) => setPrefs(data))
-        .catch(() => setMessage("No hay preferencias guardadas"));
+        .catch(() => setMessage("There are no saved preferences"));
     }
   }, [userId]);
 
@@ -29,9 +29,9 @@ function PreferencesForm({ userId }) {
   const handleSave = async () => {
     try {
       await savePreferences({ user_id: userId, ...prefs });
-      setMessage("Preferencias guardadas correctamente");
+      setMessage("Preferences saved successfully");
     } catch {
-      setMessage("Error al guardar");
+      setMessage("Error saving");
     }
   };
 
@@ -44,9 +44,9 @@ function PreferencesForm({ userId }) {
         theme: "light",
         notifications_enabled: true,
       });
-      setMessage("Preferencias eliminadas");
+      setMessage("Preferences deleted");
     } catch {
-      setMessage("Error al eliminar");
+      setMessage("Delete error");
     }
   };
 

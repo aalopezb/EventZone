@@ -4,22 +4,20 @@ from sqlalchemy.orm import Session
 from . import models, schemas, crud
 from .database import SessionLocal, engine
 
-# Crear instancia de la app antes de cualquier uso
 app = FastAPI()
 
-# CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3007"],  # frontend port
+    allow_origins=["http://localhost:3007"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Crear tablas en la base de datos
+
 models.Base.metadata.create_all(bind=engine)
 
-# Dependency para inyección de sesión de DB
+
 def get_db():
     db = SessionLocal()
     try:

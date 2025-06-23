@@ -9,7 +9,7 @@ export default function ScheduleList({ eventId }) {
 
   const fetchSchedules = async () => {
     if (!eventId) {
-      setError("ID del evento no válido");
+      setError("Invalid event ID");
       return;
     }
 
@@ -20,7 +20,7 @@ export default function ScheduleList({ eventId }) {
       const res = await fetch(`${API_URL}/event/${eventId}`);
       if (!res.ok) {
         const errText = await res.text();
-        throw new Error(`Error al obtener horarios (${res.status}): ${errText}`);
+        throw new Error(`Error getting schedules (${res.status}): ${errText}`);
       }
       const data = await res.json();
       setSchedules(data);
@@ -36,14 +36,14 @@ export default function ScheduleList({ eventId }) {
     if (eventId) fetchSchedules();
   }, [eventId]);
 
-  if (!eventId) return <p>Seleccione un evento para ver horarios.</p>;
-  if (loading) return <p>Cargando horarios...</p>;
+  if (!eventId) return <p>Select an event to view schedules.</p>;
+  if (loading) return <p>Loading schedules...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
-  if (schedules.length === 0) return <p>No hay horarios para este evento.</p>;
+  if (schedules.length === 0) return <p>There are no schedules for this event.</p>;
 
   return (
     <div>
-      <h3>Horarios para evento {eventId}</h3>
+      <h3>Event schedules {eventId}</h3>
       <ul>
         {schedules.map((sch) => (
           <li key={sch.id}>

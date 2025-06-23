@@ -6,13 +6,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/', // necesario para SPA
-    clean: true, // limpia la carpeta build antes de cada build
+    publicPath: '/', 
+    clean: true, 
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/, // JS o JSX
+        test: /\.(js|jsx)$/, 
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -27,12 +27,12 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx'], // permite imports sin extensión
+    extensions: ['.js', '.jsx'], 
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html', // origen del HTML base
-      filename: 'index.html' // nombre del archivo en /build
+      template: './public/index.html', 
+      filename: 'index.html'
     }),
   ],
   mode: 'production'

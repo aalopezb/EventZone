@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Historial de Actividad</title>
+  <title>Activity History</title>
 </head>
 <body>
-  <h1>Historial de Actividad del Usuario</h1>
+  <h1>User Activity History</h1>
   <ul id="activity-list"></ul>
 
   <script>
     async function fetchActivities() {
       try {
-        const res = await fetch('http://localhost:3012/activities'); // tu backend
+        const res = await fetch('http://localhost:3012/activities'); 
         const data = await res.json();
 
         const list = document.getElementById('activity-list');

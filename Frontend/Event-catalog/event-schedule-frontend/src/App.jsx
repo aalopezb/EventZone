@@ -18,7 +18,7 @@ export default function App() {
         if (!res.ok) throw new Error("Error al cargar eventos");
         const data = await res.json();
 
-        // Ahora no validamos UUID, solo usamos todos los eventos
+        
         setEvents(data);
         if (data.length > 0) setSelectedEventId(data[0].id);
       } catch (err) {
@@ -31,19 +31,19 @@ export default function App() {
     fetchEvents();
   }, []);
 
-  if (loadingEvents) return <p>Cargando eventos...</p>;
+  if (loadingEvents) return <p>Loading events...</p>;
   if (errorEvents) return <p>Error: {errorEvents}</p>;
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>Microservicio Horarios</h2>
+      <h2>Microservice Schedules</h2>
 
       {events.length === 0 ? (
-        <p>No hay eventos disponibles</p>
+        <p>No events available</p>
       ) : (
         <>
           <label>
-            Selecciona un evento:{" "}
+            Select an event:{" "}
             <select
               value={selectedEventId}
               onChange={(e) => setSelectedEventId(e.target.value)}

@@ -21,13 +21,13 @@ function LoginForm() {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage(`✅ Welcome! User ID: ${data.userId}`);
+        setMessage(` Welcome! User ID: ${data.userId}`);
       } else {
-        setMessage(`❌ ${data.error}`);
+        setMessage(` ${data.error}`);
       }
     } catch (error) {
       console.error('Login error:', error);
-      setMessage('❌ Server error');
+      setMessage(' Server error');
     }
   };
 

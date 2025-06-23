@@ -1,0 +1,23 @@
+{
+  "name": "category-tag-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "grpc-web": "^1.4.2",
+    "google-protobuf": "^3.21.12"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development --open"
+  },
+  "devDependencies": {
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0",
+    "babel-loader": "^9.1.2",
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5"
+  }
+}

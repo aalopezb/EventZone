@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (err, content) => {
       if (err) {
         res.writeHead(500);
-        res.end('Error cargando la página');
+        res.end('Error loading page');
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(content);
@@ -23,5 +23,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Frontend simple servido en http://localhost:${port}`);
+  console.log(`Simple frontend served in http://localhost:${port}`);
 });

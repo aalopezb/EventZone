@@ -14,7 +14,7 @@ export default function LocationList() {
       setLocations(response.data);
       setError(null);
     } catch (err) {
-      setError('Error cargando ubicaciones');
+      setError('Error loading locations');
     }
   };
 
@@ -28,7 +28,7 @@ export default function LocationList() {
       setLocations(locations.filter((loc) => loc.id !== id));
       setError(null);
     } catch {
-      setError('Error eliminando ubicación');
+      setError('Error deleting location');
     }
   };
 

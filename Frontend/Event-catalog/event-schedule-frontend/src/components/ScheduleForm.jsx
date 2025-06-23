@@ -15,12 +15,12 @@ export default function ScheduleForm({ eventId, onScheduleCreated }) {
     setError(null);
 
     if (!startDatetime || !endDatetime) {
-      setError("Fecha y hora de inicio y fin son requeridas");
+      setError("Start and end date and time are required");
       return;
     }
 
     if (new Date(startDatetime) >= new Date(endDatetime)) {
-      setError("La fecha y hora de fin debe ser posterior a la de inicio");
+      setError("The end date and time must be after the start date and time.");
       return;
     }
 
@@ -31,7 +31,7 @@ export default function ScheduleForm({ eventId, onScheduleCreated }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          event_id: Number(eventId),    // Asegura que sea número
+          event_id: Number(eventId),    
           start_datetime: startDatetime,
           end_datetime: endDatetime,
           timezone,
@@ -58,7 +58,7 @@ export default function ScheduleForm({ eventId, onScheduleCreated }) {
     }
   };
 
-  if (!eventId) return <p>Seleccione un evento para agregar horarios.</p>;
+  if (!eventId) return <p>Select an event to add schedules.</p>;
 
   return (
     <form onSubmit={handleSubmit}>

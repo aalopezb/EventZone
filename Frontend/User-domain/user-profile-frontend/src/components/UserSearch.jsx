@@ -11,7 +11,7 @@ export default function UserSearch() {
 
     try {
       const res = await fetch(`http://localhost:3004/user/${searchType}/${query}`);
-      if (!res.ok) throw new Error("Usuario no encontrado");
+      if (!res.ok) throw new Error("User not found");
       const data = await res.json();
       setResult(data);
       setError("");

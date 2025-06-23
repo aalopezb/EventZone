@@ -1,4 +1,4 @@
-# Etapa de construcción
+
 FROM node:18-alpine AS build
 
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Etapa de producción con servidor ligero (serve)
+
 FROM node:18-alpine
 
 WORKDIR /app

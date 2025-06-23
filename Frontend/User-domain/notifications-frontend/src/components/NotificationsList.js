@@ -19,12 +19,12 @@ function NotificationsList({ userId }) {
       });
   }, [userId]);
 
-  if (loading) return <p>Cargando notificaciones...</p>;
+  if (loading) return <p>loading notifications...</p>;
 
   return (
     <div>
       {notifications.length === 0 ? (
-        <p>No hay notificaciones para este usuario.</p>
+        <p>There are no notifications for this user.</p>
       ) : (
         <ul>
           {notifications.map(n => (

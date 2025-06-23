@@ -36,7 +36,7 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
     setError(null);
 
     if (!formData.name || !formData.latitude || !formData.longitude) {
-      setError('Nombre, latitud y longitud son obligatorios');
+      setError('Name, latitude, and longitude are required');
       return;
     }
 
@@ -48,7 +48,7 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
       }
       onSuccess();
     } catch (err) {
-      const backendMessage = err.response?.data?.message || err.message || 'Error guardando ubicación';
+      const backendMessage = err.response?.data?.message || err.message || 'Error saving location';
       setError(backendMessage);
     }
   };
@@ -57,17 +57,17 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
     <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <input name="name" placeholder="Nombre" value={formData.name} onChange={handleChange} />
-      <input name="address" placeholder="Dirección" value={formData.address} onChange={handleChange} />
-      <input name="city" placeholder="Ciudad" value={formData.city} onChange={handleChange} />
-      <input name="state" placeholder="Estado/Provincia" value={formData.state} onChange={handleChange} />
-      <input name="country" placeholder="País" value={formData.country} onChange={handleChange} />
-      <input name="postal_code" placeholder="Código postal" value={formData.postal_code} onChange={handleChange} />
+      <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+      <input name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
+      <input name="city" placeholder="City" value={formData.city} onChange={handleChange} />
+      <input name="state" placeholder="State/Province" value={formData.state} onChange={handleChange} />
+      <input name="country" placeholder="Country" value={formData.country} onChange={handleChange} />
+      <input name="postal_code" placeholder="Postal Code" value={formData.postal_code} onChange={handleChange} />
       <input
         name="latitude"
         type="number"
         step="any"
-        placeholder="Latitud"
+        placeholder="Latitude"
         value={formData.latitude}
         onChange={handleChange}
         required
@@ -76,7 +76,7 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
         name="longitude"
         type="number"
         step="any"
-        placeholder="Longitud"
+        placeholder="Longitude"
         value={formData.longitude}
         onChange={handleChange}
         required
@@ -84,18 +84,18 @@ export default function LocationForm({ location, onSuccess, onCancel }) {
       <input
         name="capacity"
         type="number"
-        placeholder="Capacidad"
+        placeholder="Capacity"
         value={formData.capacity}
         onChange={handleChange}
       />
       <textarea
         name="description"
-        placeholder="Descripción"
+        placeholder="Description"
         value={formData.description}
         onChange={handleChange}
       />
-      <button type="submit">{location ? 'Actualizar' : 'Crear'}</button>
-      {location && <button type="button" onClick={onCancel}>Cancelar</button>}
+      <button type="submit">{location ? 'Update' : 'Create'}</button>
+      {location && <button type="button" onClick={onCancel}>Cancel</button>}
     </form>
   );
 }

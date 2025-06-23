@@ -15,8 +15,8 @@ func main() {
 
 	r.Use(cors.New(cors.Config{
 	AllowOrigins: []string{
-		"http://localhost:3021", // frontend propio
-		"http://localhost:3027", // frontend del microservicio de horarios
+		"http://localhost:3021", 
+		"http://localhost:3027", 
 	},
 	AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 	AllowHeaders:     []string{"Origin", "Content-Type"},

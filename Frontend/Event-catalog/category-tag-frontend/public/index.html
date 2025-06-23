@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Category & Tag Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./app.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background: #f4f4f4;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      #categories,
+      #tags {
+        margin-top: 1rem;
+      }
+
+      ul {
+        padding-left: 1rem;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Event Categories & Tags</h1>
+
+    <div id="categories">
+      <h2>Categories</h2>
+      <ul id="categoryList"></ul>
+    </div>
+
+    <div id="tags">
+      <h2>Tags</h2>
+      <ul id="tagList"></ul>
+    </div>
+
+    <div class="error" id="error"></div>
+  </body>
+</html>

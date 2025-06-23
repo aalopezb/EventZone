@@ -15,19 +15,19 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Buscar usuario por email
+    
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Comparar contraseñas
+    
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Generar JWT
+    
     const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
       expiresIn: '1h',
     });

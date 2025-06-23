@@ -9,7 +9,6 @@ COPY . .
 
 RUN npm run build
 
-# Serve build folder with a simple server
 RUN npm install -g serve
 
 EXPOSE 3001

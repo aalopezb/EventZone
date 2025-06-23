@@ -31,8 +31,8 @@ function EditEvent({ event, onCancel, onSave }) {
       <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descripción" />
       <input value={location} onChange={e => setLocation(e.target.value)} placeholder="Ubicación" />
       <input type="date" value={date.slice(0,10)} onChange={e => setDate(e.target.value)} required />
-      <button type="submit">Guardar</button>
-      <button type="button" onClick={onCancel}>Cancelar</button>
+      <button type="submit">Save</button>
+      <button type="button" onClick={onCancel}>Cancel</button>
     </form>
   );
 }

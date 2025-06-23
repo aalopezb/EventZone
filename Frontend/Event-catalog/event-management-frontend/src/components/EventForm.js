@@ -17,9 +17,9 @@ const EventForm = () => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:3020/events', event);
-      alert('Evento creado con éxito');
+      alert('event created successfully');
     } catch (error) {
-      console.error('Error al crear el evento:', error);
+      console.error('Error event:', error);
     }
   };
 
@@ -61,7 +61,7 @@ const EventForm = () => {
         required
       />
 
-      <button type="submit">Crear Evento</button>
+      <button type="submit">create event</button>
     </form>
   );
 };

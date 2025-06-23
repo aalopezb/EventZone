@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div style={{ padding: '1rem', fontFamily: 'Arial' }}>
-      <h1>📨 Notificaciones del Usuario</h1>
+      <h1>📨 User Notifications</h1>
       <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
         <input
           type="text"
