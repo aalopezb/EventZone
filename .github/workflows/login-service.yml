@@ -1,4 +1,4 @@
-name: Deploy Login Service
+name: Deploy Login Service 1.0
 
 on:
   push:
