@@ -38,12 +38,12 @@ jobs:
 
           git pull origin QA || true
 
-          cd Backend/User-domain/auth-service
+          cd EventZone/Backend/User-domain/auth-service
           docker build -t auth-backend .
           docker run -d --name auth-backend -p 3002:3002 auth-backend
 
-          cd ../../../..
-          cd Frontend/User-domain/auth-frontend
+          cd ../../../../..
+          cd EventZone/Frontend/User-domain/auth-frontend
           docker build -t auth-frontend .
           docker run -d --name auth-frontend -p 3003:3003 auth-frontend
         EOF
