@@ -9,7 +9,7 @@ models.Base.metadata.create_all(bind=database.engine)
 app = FastAPI(title="Login Service")
 
 origins = [
-    "http://localhost:3016",
+    "http://http://44.196.114.105/:3016",
 ]
 
 app.add_middleware(
