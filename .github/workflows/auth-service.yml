@@ -27,22 +27,23 @@ jobs:
       run: |
         ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd ~/services/auth-service
-          
+
           docker stop auth-backend || true
           docker rm auth-backend || true
           docker rmi auth-backend || true
-          
+
           docker stop auth-frontend || true
           docker rm auth-frontend || true
           docker rmi auth-frontend || true
-          
-          git pull origin main || true
-          
-          cd backend
+
+          git pull origin QA || true
+
+          cd Backend/User-domain/auth-service
           docker build -t auth-backend .
           docker run -d --name auth-backend -p 3002:3002 auth-backend
-          
-          cd ../frontend
+
+          cd ../../../..
+          cd Frontend/User-domain/auth-frontend
           docker build -t auth-frontend .
           docker run -d --name auth-frontend -p 3003:3003 auth-frontend
         EOF
