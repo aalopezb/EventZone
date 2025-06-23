@@ -21,14 +21,14 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST_LOGIN }} << 'EOF'
-          cd ~/services/login-service/EventZone/Backend/User-domain/login-service || exit 1
+          cd ~/services/login-service-ec2/EventZone/Backend/User-domain/login-service || exit 1
           git pull origin QA
           docker build -t login-backend .
           docker stop login-backend || true
           docker rm login-backend || true
           docker run -d -p 3015:3015 --name login-backend login-backend
 
-          cd ~/services/login-service/EventZone/Frontend/User-domain/login-frontend || exit 1
+          cd ~/services/login-service-ec2/EventZone/Frontend/User-domain/login-frontend || exit 1
           git pull origin QA
           docker build -t login-frontend .
           docker stop login-frontend || true
