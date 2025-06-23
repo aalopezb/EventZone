@@ -1,4 +1,4 @@
-name: Deploy Auth Service to EC2
+name: Deploy Auth Service to EC2 1.0
 
 on:
   push:
