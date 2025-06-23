@@ -7,6 +7,9 @@ RUN npm install --production
 
 COPY . .
 
+# Generar Prisma Client
+RUN npx prisma generate
+
 EXPOSE 3000
 
 CMD ["node", "src/index.js"]
