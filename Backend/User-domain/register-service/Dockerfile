@@ -1,9 +1,6 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
-
-# Instalar openssl 1.1 y dependencias necesarias para Prisma
-RUN apk add --no-cache openssl1.1-compat
 
 COPY package*.json ./
 RUN npm install --production
