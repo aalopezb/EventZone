@@ -2,7 +2,6 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Instala openssl 1.1 y dependencias necesarias
 RUN apt-get update && apt-get install -y libssl1.1
 
 COPY package*.json ./
