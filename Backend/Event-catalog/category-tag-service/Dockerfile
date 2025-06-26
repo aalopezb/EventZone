@@ -1,40 +1,22 @@
-
 FROM rust:latest AS builder
 
-
-RUN apt-get update && apt-get install -y build-essential pkg-config libssl-dev
-
+RUN apt-get update && apt-get install -y build-essential pkg-config libssl-dev protobuf-compiler
 
 WORKDIR /app
 
-
 COPY Cargo.toml Cargo.lock ./
-
-
-RUN mkdir src && echo "fn main() {}" > src/main.rs
-
-
-RUN cargo build --release
-
-
-WORKDIR /app/full
-
-
-COPY . .
-
+COPY build.rs ./
+COPY proto ./proto
+COPY src ./src
 
 RUN cargo build --release
-
 
 FROM debian:buster-slim
 
-
 WORKDIR /app
 
-
-COPY --from=builder /app/full/target/release/category-tag-service .
+COPY --from=builder /app/target/release/category-tag-service .
 
 EXPOSE 3022
-
 
 CMD ["./category-tag-service"]
