@@ -1,0 +1,15 @@
+{
+  "name": "recommendations-service",
+  "version": "1.0.0",
+  "description": "Microservicio de recomendaciones de eventos",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "pg": "^8.11.0",
+    "dotenv": "^16.3.1"
+  }
+}

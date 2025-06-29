@@ -22,7 +22,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -43,6 +43,13 @@ const LoginForm = () => {
 
       {token && <p><strong>Token:</strong> {token}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      <button
+        style={{ marginTop: "20px", padding: "10px", fontSize: "16px", cursor: "pointer" }}
+        onClick={() => window.location.href = "http://localhost:3001"}
+      >
+        Register
+      </button>
     </div>
   );
 };

@@ -79,7 +79,22 @@ export default function App() {
           Register
         </button>
       </form>
+
       {message && <p style={{ marginTop: 10 }}>{message}</p>}
+
+      
+      <button
+        style={{
+          marginTop: "20px",
+          padding: "10px",
+          width: "100%",
+          fontSize: "16px",
+          cursor: "pointer",
+        }}
+        onClick={() => window.location.href = "http://localhost:3016"}
+      >
+        Back to Login
+      </button>
     </div>
   );
 }

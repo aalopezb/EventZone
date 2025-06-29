@@ -2,7 +2,7 @@ FROM node:18-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y libssl1.1
+RUN apt-get update && apt-get install -y libssl3
 
 COPY package*.json ./
 RUN npm install --production
