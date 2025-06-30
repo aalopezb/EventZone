@@ -1,4 +1,4 @@
-name: Deploy to EC2 3.0
+name: Deploy to EC2 4.0
 
 on:
   push:
@@ -26,7 +26,8 @@ jobs:
               git clone https://github.com/aalopezb/EventZone.git user-domain
             fi
             cd user-domain
-            git pull origin main
+            git checkout QA
+            git pull origin QA
 
             docker-compose down
             docker-compose build
