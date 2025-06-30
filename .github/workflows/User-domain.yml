@@ -1,4 +1,4 @@
-name: Deploy to EC2 5.0
+name: Deploy to EC2 6.0
 
 on:
   push:
