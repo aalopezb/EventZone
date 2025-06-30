@@ -1,4 +1,4 @@
-name: Deploy to EC2 1.0
+name: Deploy to EC2 2.0
 
 on:
   push:
@@ -28,9 +28,9 @@ jobs:
             cd user-domain
             git pull origin main
 
-            docker-compose down
+            docker compose down
 
-            docker-compose build
+            docker compose build
 
           
-            docker-compose up -d
+            docker compose up -d
