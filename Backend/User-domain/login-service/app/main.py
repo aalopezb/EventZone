@@ -10,7 +10,7 @@ app = FastAPI(title="Login Service")
 
 origins = [
     "http://localhost:3016",
-    "http://44.196.114.105:3016"
+    "http://localhost:5000"
 ]
 
 app.add_middleware(

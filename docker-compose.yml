@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+  # Frontend
+  user-frontend:
+    build: ./Frontend-Domains/user-frontend
+    container_name: user-frontend
+    ports:
+      - "5000:5000"
+    environment:
+      - REACT_APP_REGISTER_SERVICE_URL=http://register-service:3000
+      - REACT_APP_AUTH_SERVICE_URL=http://auth-service:3002
+      - REACT_APP_PROFILE_SERVICE_URL=http://user-profile-service:3004
+      - REACT_APP_ROLES_SERVICE_URL=http://user-roles-service:3006
+      - REACT_APP_PREFERENCES_SERVICE_URL=http://preferences-service:3008
+      - REACT_APP_NOTIFICATIONS_SERVICE_URL=http://notifications-service:3010
+      - REACT_APP_USER_ACTIVITY_SERVICE_URL=http://user-activity-service:3012
+      - REACT_APP_LOGIN_SERVICE_URL=http://login-service:3015
+    depends_on:
+      - register-service
+      - auth-service
+      - user-profile-service
+      - user-roles-service
+      - preferences-service
+      - notifications-service
+      - user-activity-service
+      - login-service
+    networks:
+      - backend
+
+  # Backend microservices
+  register-service:
+    build: ./Backend/User-domain/register-service
+    container_name: register-service-B
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./Backend/User-domain/register-service/.env
+    networks:
+      - backend
+
+  auth-service:
+    build: ./Backend/User-domain/auth-service
+    container_name: auth-service-B
+    ports:
+      - "3002:3002"
+    networks:
+      - backend
+
+  user-profile-service:
+    build: ./Backend/User-domain/user-profile-service
+    container_name: user-profile-service-B
+    ports:
+      - "3004:3004"
+    networks:
+      - backend
+
+  user-roles-service:
+    build: ./Backend/User-domain/user-roles-service
+    container_name: user-roles-service-B
+    ports:
+      - "3006:3006"
+    networks:
+      - backend
+
+  preferences-service:
+    build: ./Backend/User-domain/preferences-service
+    container_name: preferences-service-B
+    ports:
+      - "3008:3008"
+    networks:
+      - backend
+
+  notifications-service:
+    build: ./Backend/User-domain/notifications-service
+    container_name: notifications-service-B
+    ports:
+      - "3010:3010"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://root:example@mongo:27017/notifications-db?authSource=admin
+    networks:
+      - backend
+
+  user-activity-service:
+    build: ./Backend/User-domain/user-activity-service
+    container_name: user-activity-service-B
+    ports:
+      - "3012:3012"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://root:example@mongo:27017/user-activity-db?authSource=admin
+    networks:
+      - backend
+
+  login-service:
+    build: ./Backend/User-domain/login-service
+    container_name: login-service-B
+    ports:
+      - "3015:3015"
+    environment:
+      DATABASE_URL: postgresql://postgres:12345678@registerdb.cmvwejaybdkm.us-east-1.rds.amazonaws.com:5432/postgres
+      JWT_SECRET: clavesecretaquenadiesabe
+
+
+
+  # MongoDB for services needing it
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
