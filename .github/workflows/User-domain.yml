@@ -1,4 +1,4 @@
-name: Build & Deploy User Domain
+name: Build & Deploy User Domain 8.0
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     paths:
       - 'Backend/User-domain/**'
       - 'Frontend-Domains/user-frontend/**'
-      - '.github/workflows/User-Domain.yml'
+      - '.github/workflows/User-domain.yml'
 
 jobs:
   build-and-push:
