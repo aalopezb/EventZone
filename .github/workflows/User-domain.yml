@@ -1,18 +1,73 @@
-name: Deploy to EC2 6.0
+name: Build & Deploy User Domain
 
 on:
   push:
     branches:
       - QA
+    paths:
+      - 'Backend/User-domain/**'
+      - 'Frontend-Domains/user-frontend/**'
+      - '.github/workflows/User-Domain.yml'
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build & Push Register Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/register-service:qa ./Backend/User-domain/register-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/register-service:qa
+
+      - name: Build & Push Auth Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/auth-service:qa ./Backend/User-domain/auth-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/auth-service:qa
+
+      - name: Build & Push User Profile Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/user-profile-service:qa ./Backend/User-domain/user-profile-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/user-profile-service:qa
+
+      - name: Build & Push User Roles Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/user-roles-service:qa ./Backend/User-domain/user-roles-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/user-roles-service:qa
+
+      - name: Build & Push Preferences Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/preferences-service:qa ./Backend/User-domain/preferences-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/preferences-service:qa
+
+      - name: Build & Push Notifications Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/notifications-service:qa ./Backend/User-domain/notifications-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/notifications-service:qa
+
+      - name: Build & Push User Activity Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/user-activity-service:qa ./Backend/User-domain/user-activity-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/user-activity-service:qa
+
+      - name: Build & Push Login Service
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/login-service:qa ./Backend/User-domain/login-service
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/login-service:qa
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -29,6 +84,5 @@ jobs:
             git checkout QA
             git pull origin QA
 
-            docker-compose down
-            docker-compose build
+            docker-compose pull
             docker-compose up -d

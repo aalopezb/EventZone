@@ -1,7 +1,9 @@
+version: '3.8'
+
 services:
   # Frontend
   user-frontend:
-    build: ./Frontend-Domains/user-frontend
+    image: aalopezb/user-frontend:qa
     container_name: user-frontend
     ports:
       - "5000:5000"
@@ -28,7 +30,7 @@ services:
 
   # Backend microservices
   register-service:
-    build: ./Backend/User-domain/register-service
+    image: aalopezb/register-service:qa
     container_name: register-service-B
     ports:
       - "3000:3000"
@@ -38,7 +40,7 @@ services:
       - backend
 
   auth-service:
-    build: ./Backend/User-domain/auth-service
+    image: aalopezb/auth-service:qa
     container_name: auth-service-B
     ports:
       - "3002:3002"
@@ -46,7 +48,7 @@ services:
       - backend
 
   user-profile-service:
-    build: ./Backend/User-domain/user-profile-service
+    image: aalopezb/user-profile-service:qa
     container_name: user-profile-service-B
     ports:
       - "3004:3004"
@@ -54,7 +56,7 @@ services:
       - backend
 
   user-roles-service:
-    build: ./Backend/User-domain/user-roles-service
+    image: aalopezb/user-roles-service:qa
     container_name: user-roles-service-B
     ports:
       - "3006:3006"
@@ -62,7 +64,7 @@ services:
       - backend
 
   preferences-service:
-    build: ./Backend/User-domain/preferences-service
+    image: aalopezb/preferences-service:qa
     container_name: preferences-service-B
     ports:
       - "3008:3008"
@@ -70,7 +72,7 @@ services:
       - backend
 
   notifications-service:
-    build: ./Backend/User-domain/notifications-service
+    image: aalopezb/notifications-service:qa
     container_name: notifications-service-B
     ports:
       - "3010:3010"
@@ -82,7 +84,7 @@ services:
       - backend
 
   user-activity-service:
-    build: ./Backend/User-domain/user-activity-service
+    image: aalopezb/user-activity-service:qa
     container_name: user-activity-service-B
     ports:
       - "3012:3012"
@@ -94,15 +96,15 @@ services:
       - backend
 
   login-service:
-    build: ./Backend/User-domain/login-service
+    image: aalopezb/login-service:qa
     container_name: login-service-B
     ports:
       - "3015:3015"
     environment:
       DATABASE_URL: postgresql://postgres:12345678@registerdb.cmvwejaybdkm.us-east-1.rds.amazonaws.com:5432/postgres
       JWT_SECRET: clavesecretaquenadiesabe
-
-
+    networks:
+      - backend
 
   # MongoDB for services needing it
   mongo:
