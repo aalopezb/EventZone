@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Frontend
   user-frontend:
-    image: aalopezb/user-frontend:qa
+    image: aalopezb/user-frontend:QA
     container_name: user-frontend
     ports:
       - "5000:5000"
@@ -30,7 +30,7 @@ services:
 
   # Backend microservices
   register-service:
-    image: aalopezb/register-service:qa
+    image: aalopezb/register-service:QA
     container_name: register-service-B
     ports:
       - "3000:3000"
@@ -40,7 +40,7 @@ services:
       - backend
 
   auth-service:
-    image: aalopezb/auth-service:qa
+    image: aalopezb/auth-service:QA
     container_name: auth-service-B
     ports:
       - "3002:3002"
@@ -48,7 +48,7 @@ services:
       - backend
 
   user-profile-service:
-    image: aalopezb/user-profile-service:qa
+    image: aalopezb/user-profile-service:QA
     container_name: user-profile-service-B
     ports:
       - "3004:3004"
@@ -56,7 +56,7 @@ services:
       - backend
 
   user-roles-service:
-    image: aalopezb/user-roles-service:qa
+    image: aalopezb/user-roles-service:QA
     container_name: user-roles-service-B
     ports:
       - "3006:3006"
@@ -64,7 +64,7 @@ services:
       - backend
 
   preferences-service:
-    image: aalopezb/preferences-service:qa
+    image: aalopezb/preferences-service:QA
     container_name: preferences-service-B
     ports:
       - "3008:3008"
@@ -72,7 +72,7 @@ services:
       - backend
 
   notifications-service:
-    image: aalopezb/notifications-service:qa
+    image: aalopezb/notifications-service:QA
     container_name: notifications-service-B
     ports:
       - "3010:3010"
@@ -84,7 +84,7 @@ services:
       - backend
 
   user-activity-service:
-    image: aalopezb/user-activity-service:qa
+    image: aalopezb/user-activity-service:QA
     container_name: user-activity-service-B
     ports:
       - "3012:3012"
@@ -96,7 +96,7 @@ services:
       - backend
 
   login-service:
-    image: aalopezb/login-service:qa
+    image: aalopezb/login-service:QA
     container_name: login-service-B
     ports:
       - "3015:3015"
