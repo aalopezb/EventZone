@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { registerUser } from '../../services/registerApi';
 
 const RegisterForm = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '', role: '' }); //user
+  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'user' }); //user
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
@@ -18,7 +18,7 @@ const RegisterForm = () => {
     try {
       await registerUser(form);
       setMessage('User registered successfully');
-      setForm({ name: '', email: '', password: '', role: '' }); //user
+      setForm({ name: '', email: '', password: '', role: 'user' }); //user
     } catch {
       setError('Registration failed');
     }
