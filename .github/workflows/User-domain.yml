@@ -1,4 +1,4 @@
-name: Build and Deploy User Domain to EC2 12.1
+name: Build and Deploy User Domain to EC2 12.2
 
 on:
   push:
@@ -80,7 +80,7 @@ jobs:
     needs: build_and_push
 
     steps:
-      - name: Install Docker Compose v2 on EC2
+      - name: Install Docker Compose v2 on EC2 (if needed)
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ env.EC2_HOST }}
@@ -106,5 +106,7 @@ jobs:
             cd /home/${{ env.EC2_USER }}/user-domain || exit 1
             git checkout QA
             git pull origin QA
+
             docker compose pull
-            docker compose up -d
+            docker container prune -f
+            docker compose up -d --force-recreate
