@@ -1,4 +1,4 @@
-name: Build and Deploy User Domain to EC2 12.4
+name: Build and Deploy User Domain to EC2 12.5
 
 on:
   push:

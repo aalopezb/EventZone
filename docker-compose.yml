@@ -7,7 +7,15 @@ services:
     container_name: user-frontend
     ports:
       - "5000:5000"
-    
+    environment:
+      - REACT_APP_REGISTER_SERVICE_URL=http://100.29.129.153:3000
+      - REACT_APP_AUTH_SERVICE_URL=http://100.29.129.153:3002
+      - REACT_APP_PROFILE_SERVICE_URL=http://100.29.129.153:3004
+      - REACT_APP_ROLES_SERVICE_URL=http://100.29.129.153:3006
+      - REACT_APP_PREFERENCES_SERVICE_URL=http://100.29.129.153:3008
+      - REACT_APP_NOTIFICATIONS_SERVICE_URL=http://100.29.129.153:3010
+      - REACT_APP_USER_ACTIVITY_SERVICE_URL=http://100.29.129.153:3012
+      - REACT_APP_LOGIN_SERVICE_URL=http://100.29.129.153:3015
     depends_on:
       - register-service
       - auth-service
