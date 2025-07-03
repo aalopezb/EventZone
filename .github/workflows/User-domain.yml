@@ -1,4 +1,4 @@
-name: Build and Deploy User Domain to EC2 12.3
+name: Build and Deploy User Domain to EC2 12.4
 
 on:
   push:
@@ -30,23 +30,18 @@ jobs:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_TOKEN }}
 
-      - name: Generate .env file with EC2 public IP
+      - name: Build and push user-frontend image with dynamic IP
         run: |
-          cat <<EOF > ./Frontend-Domains/user-frontend/.env
-          REACT_APP_REGISTER_SERVICE_URL=http://${{ env.EC2_HOST }}:3000
-          REACT_APP_AUTH_SERVICE_URL=http://${{ env.EC2_HOST }}:3002
-          REACT_APP_PROFILE_SERVICE_URL=http://${{ env.EC2_HOST }}:3004
-          REACT_APP_ROLES_SERVICE_URL=http://${{ env.EC2_HOST }}:3006
-          REACT_APP_PREFERENCES_SERVICE_URL=http://${{ env.EC2_HOST }}:3008
-          REACT_APP_NOTIFICATIONS_SERVICE_URL=http://${{ env.EC2_HOST }}:3010
-          REACT_APP_USER_ACTIVITY_SERVICE_URL=http://${{ env.EC2_HOST }}:3012
-          REACT_APP_LOGIN_SERVICE_URL=http://${{ env.EC2_HOST }}:3015
-          PORT=5000
-          EOF
-
-      - name: Build and push user-frontend image
-        run: |
-          docker build -t $DOCKERHUB_USERNAME/user-frontend:QA ./Frontend-Domains/user-frontend
+          docker build \
+            --build-arg REACT_APP_REGISTER_SERVICE_URL=http://${{ env.EC2_HOST }}:3000 \
+            --build-arg REACT_APP_AUTH_SERVICE_URL=http://${{ env.EC2_HOST }}:3002 \
+            --build-arg REACT_APP_PROFILE_SERVICE_URL=http://${{ env.EC2_HOST }}:3004 \
+            --build-arg REACT_APP_ROLES_SERVICE_URL=http://${{ env.EC2_HOST }}:3006 \
+            --build-arg REACT_APP_PREFERENCES_SERVICE_URL=http://${{ env.EC2_HOST }}:3008 \
+            --build-arg REACT_APP_NOTIFICATIONS_SERVICE_URL=http://${{ env.EC2_HOST }}:3010 \
+            --build-arg REACT_APP_USER_ACTIVITY_SERVICE_URL=http://${{ env.EC2_HOST }}:3012 \
+            --build-arg REACT_APP_LOGIN_SERVICE_URL=http://${{ env.EC2_HOST }}:3015 \
+            -t $DOCKERHUB_USERNAME/user-frontend:QA ./Frontend-Domains/user-frontend
           docker push $DOCKERHUB_USERNAME/user-frontend:QA
 
       - name: Build and push register-service image
