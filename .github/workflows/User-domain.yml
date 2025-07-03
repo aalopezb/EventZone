@@ -1,4 +1,4 @@
-name: Build and Deploy User Domain to EC2 12.2
+name: Build and Deploy User Domain to EC2 12.3
 
 on:
   push:
@@ -29,6 +29,20 @@ jobs:
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_TOKEN }}
+
+      - name: Generate .env file with EC2 public IP
+        run: |
+          cat <<EOF > ./Frontend-Domains/user-frontend/.env
+          REACT_APP_REGISTER_SERVICE_URL=http://${{ env.EC2_HOST }}:3000
+          REACT_APP_AUTH_SERVICE_URL=http://${{ env.EC2_HOST }}:3002
+          REACT_APP_PROFILE_SERVICE_URL=http://${{ env.EC2_HOST }}:3004
+          REACT_APP_ROLES_SERVICE_URL=http://${{ env.EC2_HOST }}:3006
+          REACT_APP_PREFERENCES_SERVICE_URL=http://${{ env.EC2_HOST }}:3008
+          REACT_APP_NOTIFICATIONS_SERVICE_URL=http://${{ env.EC2_HOST }}:3010
+          REACT_APP_USER_ACTIVITY_SERVICE_URL=http://${{ env.EC2_HOST }}:3012
+          REACT_APP_LOGIN_SERVICE_URL=http://${{ env.EC2_HOST }}:3015
+          PORT=5000
+          EOF
 
       - name: Build and push user-frontend image
         run: |
@@ -106,7 +120,6 @@ jobs:
             cd /home/${{ env.EC2_USER }}/user-domain || exit 1
             git checkout QA
             git pull origin QA
-
             docker compose pull
             docker container prune -f
             docker compose up -d --force-recreate
