@@ -1,4 +1,4 @@
-name: Build and Deploy User Domain to EC2 12.5
+name: Build and Deploy User Domain to EC2 12.6
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and push user-frontend image with dynamic IP
         run: |
-          docker build \
+          docker build --no-cache \
             --build-arg REACT_APP_REGISTER_SERVICE_URL=http://${{ env.EC2_HOST }}:3000 \
             --build-arg REACT_APP_AUTH_SERVICE_URL=http://${{ env.EC2_HOST }}:3002 \
             --build-arg REACT_APP_PROFILE_SERVICE_URL=http://${{ env.EC2_HOST }}:3004 \
