@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package categorytag;
+
+service CategoryTagService {
+  rpc CreateCategory (CategoryRequest) returns (CategoryResponse);
+  rpc ListCategories (Empty) returns (CategoryListResponse);
+
+  rpc CreateTag (TagRequest) returns (TagResponse);
+  rpc ListTags (Empty) returns (TagListResponse);
+}
+
+message Empty {}
+
+message CategoryRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CategoryResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CategoryListResponse {
+  repeated CategoryResponse categories = 1;
+}
+
+message TagRequest {
+  string name = 1;
+}
+
+message TagResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message TagListResponse {
+  repeated TagResponse tags = 1;
+}
